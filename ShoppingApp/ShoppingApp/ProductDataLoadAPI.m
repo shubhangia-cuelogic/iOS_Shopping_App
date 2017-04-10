@@ -10,24 +10,14 @@
 #import "AFNetworking.h"
 #import "HTTPRequest.h"
 @implementation ProductDataLoadAPI
--(void)loadProductData:(void (^)(ProductModel *, NSString *))callbackBlock{
+-(void)loadProductData:(void (^)(id, NSString *))callbackBlock{
     
-//    NSString *string = @"https://mobiletest-hackathon.herokuapp.com/getdata/";
-//    [[AFHTTPRequestSerializer serializer] requestWithMethod:@"GET" URLString:string parameters:nil error:nil];
+
     
     NSURL *URL = [NSURL URLWithString:@"https://mobiletest-hackathon.herokuapp.com/getdata/"];
-    
-    AFHTTPSessionManager *manager = [AFHTTPSessionManager manager];
-    
-    [manager GET:URL.absoluteString parameters:nil progress:nil success:^(NSURLSessionTask *task, id responseObject)
-     
-    {
-        callbackBlock(responseObject,nil);
-        
-    }failure:^(NSURLSessionTask *myOperation, NSError *error)
-     
-    {
-         callbackBlock(nil,error.description);
-        
-    }];}
+    HTTPRequest* request=[[HTTPRequest alloc]init];
+    [request GetHttpRequestWithURL:URL completion:^(id respose, NSString * error) {
+        callbackBlock(respose,error);
+    }];
+     }
 @end

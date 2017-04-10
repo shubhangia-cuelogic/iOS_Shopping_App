@@ -14,6 +14,6 @@
 #import "ProductModel.h"
 @protocol ProductAPIProtocol<NSObject>
 
-- (void)loadProductData:(void (^)(ProductModel *responseData, NSString *error))callbackBlock;
+- (void)loadProductData:(void (^)(id responseData, NSString *error))callbackBlock;
 
 @end
