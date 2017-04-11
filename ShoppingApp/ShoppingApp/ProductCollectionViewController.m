@@ -24,7 +24,6 @@
 }
 
 
-static NSString * const reuseIdentifier = @"Cell";
 
 - (void)viewDidLoad {
     [super viewDidLoad];
@@ -44,6 +43,7 @@ static NSString * const reuseIdentifier = @"Cell";
 -(void) hideActivityIndicator {
     [activityIndicator stopAnimating];
     self.view.userInteractionEnabled = YES;
+    [activityIndicator setHidden:YES];
 }
 
 - (void)didReceiveMemoryWarning {
@@ -75,7 +75,8 @@ static NSString * const reuseIdentifier = @"Cell";
     
     [[[ProductList sharedCartList] productsInCart] addObject:allProducts[[productCollectionView indexPathForCell:cell].row]];
     NSLog(@"total products in cart: %lu",(unsigned long)[[ProductList sharedCartList] productsInCart].count);
-}
+    [self alertMessage];
+    }
 
 #pragma mark <UICollectionViewDataSource>
 
@@ -86,7 +87,20 @@ static NSString * const reuseIdentifier = @"Cell";
 - (NSInteger)collectionView:(UICollectionView *)collectionView numberOfItemsInSection:(NSInteger)section{
     return allProducts.count;
 }
-
+-(void)alertMessage
+{
+    UIAlertController* alert = [UIAlertController
+                                alertControllerWithTitle:@""
+                                message:@"Item added in cart"
+                                preferredStyle:UIAlertControllerStyleAlert];
+    
+    UIAlertAction* defaultAction = [UIAlertAction
+                                    actionWithTitle:@"OK" style:UIAlertActionStyleDefault
+                                    handler:^(UIAlertAction * action) {}];
+    
+    [alert addAction:defaultAction];
+    [self presentViewController:alert animated:YES completion:nil];
+}
 - (UICollectionViewCell *)collectionView:(UICollectionView *)collectionView cellForItemAtIndexPath:(NSIndexPath *)indexPath{
     static NSString *CellIdentifier = @"ProductCollectionViewCell";
     ProductCollectionViewCell *cell = [collectionView dequeueReusableCellWithReuseIdentifier:CellIdentifier forIndexPath:indexPath];
@@ -98,9 +112,7 @@ static NSString * const reuseIdentifier = @"Cell";
     cell.vendorAddress.text=bean.vendorAddress;
    [cell.imgProduct sd_setImageWithURL:[NSURL URLWithString:bean.imgURL]
                  placeholderImage:[UIImage imageNamed:@"error.jpeg"]];
-    
     cell.delegate = self;
-    //cell.cellIndex = indexPath.row;
     
     return cell;
 }

@@ -21,4 +21,9 @@
     // Configure the view for the selected state
 }
 
+- (IBAction)actionRemoveCart:(id)sender {
+    if (self.delegate && [self.delegate respondsToSelector:@selector(didClickOnTableCell:)]) {
+        [self.delegate didClickOnTableCell:self];
+    }
+}
 @end

@@ -12,11 +12,9 @@
 @implementation ProductDataLoadAPI
 -(void)loadProductData:(void (^)(id, NSString *))callbackBlock{
     
-
-    
     NSURL *URL = [NSURL URLWithString:@"https://mobiletest-hackathon.herokuapp.com/getdata/"];
     HTTPRequest* request=[[HTTPRequest alloc]init];
-    [request GetHttpRequestWithURL:URL completion:^(id respose, NSString * error) {
+    [request getHttpRequestWithURL:URL completion:^(id respose, NSString * error) {
         callbackBlock(respose,error);
     }];
      }

@@ -14,14 +14,9 @@
 @synthesize productPrice;
 @synthesize vendorName;
 @synthesize vendorAddress;
-//- (IBAction)actionAddToCart:(id)sender {
-//    if (self.delegate && [self.delegate respondsToSelector:@selector(didClickOnCellAtIndex:)]) {
-//        [self.delegate didClickOnCellAtIndex:_cellIndex];
-//    }
-//}
 - (IBAction)actionAddToCart:(id)sender {
     if (self.delegate && [self.delegate respondsToSelector:@selector(didClickOnCell:)]) {
-                [self.delegate didClickOnCell:self];
-            }
+        [self.delegate didClickOnCell:self];
+    }
 }
 @end

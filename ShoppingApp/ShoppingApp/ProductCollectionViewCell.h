@@ -10,7 +10,7 @@
 #import "AddCartProtocol.h"
 @interface ProductCollectionViewCell : UICollectionViewCell
 @property (weak, nonatomic) id<CellDelegate>delegate;
-//@property (assign, nonatomic) NSInteger cellIndex;
+
 
 @property IBOutlet UIImageView* imgProduct;
 @property IBOutlet UILabel* productName;

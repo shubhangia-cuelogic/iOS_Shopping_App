@@ -12,6 +12,6 @@
 
 @class CartTableViewCell;
 #endif /* DelecteFromCartProtocol_h */
-@protocol CellDelegate <NSObject>
-- (void)didClickOnCell:(CartTableViewCell *)cell;
+@protocol TableDelegate <NSObject>
+- (void)didClickOnTableCell:(CartTableViewCell *)cell;
 @end

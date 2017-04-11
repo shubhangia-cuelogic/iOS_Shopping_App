@@ -19,7 +19,7 @@
 }
 
 
-
+@synthesize totalPrice;
 - (instancetype)initWithCoder:(NSCoder *)coder
 {
     self = [super initWithCoder:coder];
@@ -42,9 +42,18 @@
 
 - (void)viewDidAppear:(BOOL)animated{
     NSLog(@"total products in cart: %lu",(unsigned long)[[ProductList sharedCartList] productsInCart].count);
+    int total=0;
     cartList = [[ProductList sharedCartList] productsInCart];
+   
+    for (int i=0; i<cartList.count; i++) {
+        ProductModel* bean=cartList[i];
+        total=total+bean.productPrice.intValue;
+    }
+    totalPrice.text=[NSString stringWithFormat:@"Total price: %d", total];
+    
     [tblView reloadData];
-}
+
+    }
 
 - (void)didReceiveMemoryWarning {
     [super didReceiveMemoryWarning];
@@ -62,7 +71,20 @@
 
     return cartList.count;
 }
+-(void)didClickOnTableCell:(CartTableViewCell *)cell{
 
+    int total=0;
+    [[[ProductList sharedCartList] productsInCart] removeObjectAtIndex:[tblView indexPathForCell:cell].row];
+   
+     cartList = [[ProductList sharedCartList] productsInCart];
+    
+    for (int i=0; i<cartList.count; i++) {
+        ProductModel* bean=cartList[i];
+        total=total+bean.productPrice.intValue;
+    }
+    totalPrice.text=[NSString stringWithFormat:@"Total price: %d", total];
+      [tblView reloadData];
+}
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
     CartTableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:@"CartTableViewCell" forIndexPath:indexPath];
@@ -74,7 +96,7 @@
     cell.vendorAddress.text=bean.vendorAddress;
     [cell.imgProduct sd_setImageWithURL:[NSURL URLWithString:bean.imgURL]
                        placeholderImage:[UIImage imageNamed:@"error.jpeg"]];
-    
+    cell.delegate=self;
     return cell;
 }
 
@@ -122,5 +144,6 @@
     // Pass the selected object to the new view controller.
 }
 */
+
 
 @end

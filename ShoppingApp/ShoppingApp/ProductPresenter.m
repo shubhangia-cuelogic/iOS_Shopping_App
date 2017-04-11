@@ -19,16 +19,16 @@ id<ProductViewProtocol> ProductView;
 
 
 -(void)loadDataHandler{
-    ProductDataLoadAPI* Loaddata=[[ProductDataLoadAPI alloc]init];
+    ProductDataLoadAPI* productLoadDataAPI=[[ProductDataLoadAPI alloc]init];
     [ProductView showLoading];
-    [Loaddata loadProductData:^(id responseData, NSString *error) {
+    [productLoadDataAPI loadProductData:^(id responseData, NSString *error) {
         [ProductView hideLoading];
         if(error==nil){
           
-             NSDictionary *responseDict = (NSDictionary *) responseData;
-            ResponseParser* parser=[[ResponseParser alloc]init];
-             NSMutableArray* productList=[parser parseProductList:responseDict];
-            [ProductView didProductLoadSuccessfully:productList];
+             NSDictionary *response = (NSDictionary *) responseData;
+             ResponseParser* parser=[[ResponseParser alloc]init];
+             NSMutableArray* allProductList=[parser parseProductList:response];
+             [ProductView didProductLoadSuccessfully:allProductList];
             
             
         }else{

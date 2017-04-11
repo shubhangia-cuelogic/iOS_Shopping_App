@@ -11,6 +11,6 @@
 #import "ProductModel.h"
 #import "CartTableViewCell.h"
 #import <SDWebImage/UIImageView+WebCache.h>
-@interface CartTableViewController : UITableViewController
-
+@interface CartTableViewController : UIViewController<TableDelegate>
+@property IBOutlet UILabel* totalPrice;
 @end
