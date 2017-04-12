@@ -44,8 +44,10 @@ id <ProductAPIProtocol> api;
 
 -(void)testLoadProductDataWithSuccess {
     //api.LoadProductData:"" withCallback:(void (^)(ProductModel *responseData, NSString *error))callbackBlock
+    
      XCTestExpectation *expectation = [self expectationWithDescription:@"LoadData"];
-    [api loadProductData:^(ProductModel *responseData, NSString *error) {
+    
+    [api loadProductData:^(id responseData, NSString *error) {
         if (error == nil) {
             
             XCTAssertNil(error, @"Failure response");
@@ -58,7 +60,8 @@ id <ProductAPIProtocol> api;
         
         [expectation fulfill];
     }];
-    //  [self waitForExpectationsWithTimeout:120.0 handler:nil];
+    
+    [self waitForExpectationsWithTimeout:120.0 handler:nil];
 }
 
 @end

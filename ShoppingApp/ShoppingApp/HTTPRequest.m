@@ -9,5 +9,19 @@
 #import "HTTPRequest.h"
 
 @implementation HTTPRequest
-
+-(void)getHttpRequestWithURL:(NSURL*)url completion:(void (^)(id, NSString *))callbackBlock{
+    
+    AFHTTPSessionManager *manager = [AFHTTPSessionManager manager];
+    [manager GET:url.absoluteString parameters:nil progress:nil success:^(NSURLSessionTask *task, id responseObject)
+     
+     {
+         callbackBlock(responseObject,nil);
+         
+     }failure:^(NSURLSessionTask *myOperation, NSError *error)
+     
+     {
+         callbackBlock(nil,error.description);
+         
+     }];
+}
 @end

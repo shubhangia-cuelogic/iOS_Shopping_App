@@ -9,7 +9,10 @@
 #import <Foundation/Foundation.h>
 #import "ProductDataLoadAPI.h"
 #import "ProductAPIProtocol.h"
+#import "ResponseParser.h"
+#import "ProductCollectionViewController.h"
+#import "ProductViewProtocol.h"
 @interface ProductPresenter : NSObject
--(instancetype)initWithProductAPI:(id<ProductAPIProtocol>) api;
--(void)loaddataHandler;
+-(instancetype)initWithProductAPI:(id<ProductAPIProtocol>) api andProductView:(id<ProductViewProtocol>) ProductView;
+-(void)loadDataHandler;
 @end

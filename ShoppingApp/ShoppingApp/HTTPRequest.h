@@ -7,7 +7,8 @@
 //
 
 #import <Foundation/Foundation.h>
-
+#import "AFNetworking.h"
+#import "HTTPRequest.h"
 @interface HTTPRequest : NSObject
-
+-(void)getHttpRequestWithURL:(NSURL*)url completion:(void (^)(id, NSString *))callbackBlock;
 @end

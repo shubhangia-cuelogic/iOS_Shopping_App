@@ -9,5 +9,14 @@
 #import "ProductCollectionViewCell.h"
 
 @implementation ProductCollectionViewCell
-
+@synthesize imgProduct;
+@synthesize productName;
+@synthesize productPrice;
+@synthesize vendorName;
+@synthesize vendorAddress;
+- (IBAction)actionAddToCart:(id)sender {
+    if (self.delegate && [self.delegate respondsToSelector:@selector(didClickOnCell:)]) {
+        [self.delegate didClickOnCell:self];
+    }
+}
 @end

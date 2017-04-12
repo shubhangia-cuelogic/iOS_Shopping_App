@@ -7,7 +7,8 @@
 //
 
 #import <Foundation/Foundation.h>
-
+#import "ProductModel.h"
+#import "ProductList.h"
 @interface ResponseParser : NSObject
-
+-(NSMutableArray*)parseProductList:(NSDictionary*) productDir;
 @end
